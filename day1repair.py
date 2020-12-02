@@ -25,7 +25,7 @@ if __name__ == "__main__":
         raw_input = f.readlines()
 
     # Strip newlines & convert to numbers
-    entry_input = list(map(lambda s: int(s.rstrip()), raw_input))
+    entry_input = list(map(lambda s: int(s.strip()), raw_input))
 
     # Part 1 (product of 2 entries that sum to 2020)
     entry1, entry2 = two_entry_2020_sum(entry_input)
