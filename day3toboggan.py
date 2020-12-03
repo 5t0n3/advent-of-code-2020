@@ -41,7 +41,6 @@ if __name__ == "__main__":
 
     # Part 2 (multiple different increment amounts)
     step_amounts = [(1, 1), (3, 1), (5, 1), (7, 1), (1, 2)]
-    tree_encounters = map(lambda step: count_trees(*step, input_map), step_amounts)
-    part2_result = reduce(lambda acc, total: acc * total, tree_encounters, 1)
+    part2_result = reduce(lambda acc, step: acc * count_trees(*step, input_map), step_amounts, 1)
     print(f"Part 2 result: {part2_result}")
     assert part2_result == 727923200, f"Unexpected part 2 result: {part2_result}"
