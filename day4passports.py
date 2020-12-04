@@ -70,8 +70,7 @@ if __name__ == "__main__":
     # For part 1, ignore "cid" field
     part1_fields = all_fields[:-1]
     part1_valid_passports = list(
-        filter(lambda pass_map: pass_valid_part1(part1_fields, pass_map),
-               parsed_passports))
+        filter(partial(pass_valid_part1, part1_fields), parsed_passports))
 
     print(f"Valid passports in part 1: {len(part1_valid_passports)}")
     assert len(
