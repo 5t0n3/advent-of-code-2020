@@ -23,7 +23,7 @@ def pass_valid_part1(req_fields, pass_map):
 
 def fields_valid(predicate_dict, pass_map):
     """
-    Validates a password based on the supplied predicate.
+    Validates a password based on the supplied predicate-field map.
     """
     pass_valid = True
 
