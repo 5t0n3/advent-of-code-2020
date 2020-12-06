@@ -30,8 +30,10 @@ if __name__ == "__main__":
 
     # Part 2 (sum of group-wide "yes" answers)
 
-    # Remove blank lines (only "\n")
+    # Find common answers within each group (delineated by "\n\n")
     common_group_answers = map(group_answer_sets, raw_input)
+
+    # Sum of all groups' "yes" answer amounts
     common_yes_answers = reduce(lambda acc, qset: acc + len(qset),
                                 common_group_answers, 0)
 
