@@ -34,7 +34,7 @@ def parse_suitcase_order(line):
     # Split at commas to separate inner colors
     inner_color_list = inner_colors.split(",")
 
-    return parse_inner_colors(inner_color_list), outer_color.strip()
+    return outer_color.strip(), parse_inner_colors(inner_color_list)
 
 
 def part1_starting_colors(color_rules, color_name):
@@ -57,6 +57,40 @@ def part1_starting_colors(color_rules, color_name):
             set()))
 
 
+def repeated_suitcases(color_rules, parent_color, color_name):
+    """
+    Counts the number of suitcases, accounting for repeated suitcases (i.e.
+    multiple of one color inside another).
+    """
+    repetitions = color_rules[parent_color][color_name]
+
+    # Empty (no cases inside)
+    if repetitions == "no":
+        return 0
+
+    repetitions = int(repetitions)
+
+    return repetitions + repetitions * part2_inner_suitcases(
+        color_rules, color_name)
+
+
+def part2_inner_suitcases(color_rules, color_name):
+    """
+    Returns the number of suitcases contained within the `color_name` suitcase.
+    """
+    # Find child suitcases
+    child_colors = color_rules.get(color_name)
+
+    # Handle case where no suitcases inside `color_name`
+    if child_colors is None:
+        return 0
+
+    else:
+        return sum(
+            map(partial(repeated_suitcases, color_rules, color_name),
+                child_colors))
+
+
 if __name__ == "__main__":
     with open("input/day7.txt", "r") as f:
         # Remove newlines from end of every line
@@ -68,7 +102,7 @@ if __name__ == "__main__":
 
     # Amounts of inner suitcases don't matter
     ignored_amounts = list(
-        map(lambda colors: (list(colors[0].keys()), colors[1]), parsed_input))
+        map(lambda colors: (list(colors[1].keys()), colors[0]), parsed_input))
     possible_starting_colors = len(
         part1_starting_colors(ignored_amounts, "shiny gold"))
 
@@ -76,3 +110,9 @@ if __name__ == "__main__":
         f"Part 1 result (colors that lead to shiny gold): {possible_starting_colors}"
     )
     assert possible_starting_colors == 192, f"Unexpected part 1 result: {possible_starting_colors}"
+
+    # Part 2 (suitcases inside shiny gold)
+    inner_cases = part2_inner_suitcases(dict(parsed_input), "shiny gold")
+
+    print(f"Part 2 result (# of cases inside shiny gold): {inner_cases}")
+    assert inner_cases == 12128, f"Unexpected part 2 result: {inner_cases}"
