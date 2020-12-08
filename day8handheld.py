@@ -12,7 +12,6 @@ def execute_handheld_code(instructions, visited, cursor, acc):
     """
     # Check if at end of instructions
     if cursor == len(instructions):
-        print(acc, "is valid")
         return acc, True
 
     # Check if current instruction has been executed before
