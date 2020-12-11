@@ -1,32 +1,41 @@
 def charger_combos(joltages):
     """
-    Calculates the number of valid charger combinations more efficiently?
+    Calculates the number of valid charger combinations.
     """
-    pair_paths = {}
+    pair_paths = {}  # Number of paths between a pair of ratings
     device_rating = joltages[-1]  # Already includes device rating; sorted
 
+    # Paths are built starting at the end, so iterate backwards
     for rating in reversed(joltages):
-        # Get possible ratings after current
+        # Get possible child ratings (greater joltages)
         direct_children = list(filter(lambda j: 1 <= j - rating <= 3,
                                       joltages))
 
-        # Update direct (and some indirect) paths
         for child in direct_children:
+            # Find children between current/child ratings, if applicable, as
+            # they increase the number of paths between ratings
             intermediary_children = list(
                 filter(lambda c: c in range(rating, child), direct_children))
 
+            # Include direct path (1) as well as stopping at any intermediary ratings
             pair_paths[(rating, child)] = 1 + len(intermediary_children)
 
+        # Check if number of paths to end has already been calculated
         end_paths = pair_paths.get((rating, device_rating))
+
+        # Calculate the number of paths from all children to the end
         child_total_paths = sum(
             map(lambda c: pair_paths[(c, device_rating)], direct_children))
 
-        if end_paths is None:
-            pair_paths[(rating, device_rating)] = child_total_paths
-
-        else:
+        # Increment it if it already exists
+        if end_paths is not None:
             pair_paths[(rating, device_rating)] += child_total_paths
 
+        # Otherwise set it
+        else:
+            pair_paths[(rating, device_rating)] = child_total_paths
+
+    # Number of paths from outlet (0 jolts) to end
     return pair_paths[(0, device_rating)]
 
 
@@ -44,6 +53,7 @@ if __name__ == "__main__":
     one_jolt_differences = 0
     three_jolt_differences = 0
 
+    # Count joltage jumps when using all adapters
     for rating in sorted_joltages:
         joltage_difference = rating - previous_joltage
 
@@ -57,8 +67,7 @@ if __name__ == "__main__":
     assert part1_result == 2400, f"Unexpected part 1 result: {part1_result}"
 
     # Part 2 (# of valid charger permutations)
-    # print(alternative_charger_combos(sorted_joltages))
-
     part2_result = charger_combos(sorted_joltages)
+
     print(f"Part 2 result (charger combinations): {part2_result}")
     assert part2_result == 338510590509056, f"Unexpected part 2 result: {part2_result}"
