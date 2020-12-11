@@ -45,7 +45,7 @@ if __name__ == "__main__":
 
     sorted_joltages = [0] + list(sorted(raw_input))
 
-    # Add device joltage
+    # Add device joltage (max in input + 3)
     sorted_joltages.append(sorted_joltages[-1] + 3)
 
     # Part 1 (1-jolt * 3-jolt differences)
