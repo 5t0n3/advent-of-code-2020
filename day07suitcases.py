@@ -92,7 +92,7 @@ def part2_inner_suitcases(color_rules, color_name):
 
 
 if __name__ == "__main__":
-    with open("input/day7.txt", "r") as f:
+    with open("input/day07.txt", "r") as f:
         # Remove newlines from end of every line
         raw_input = map(str.strip, f.readlines())
 

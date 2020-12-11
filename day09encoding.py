@@ -17,7 +17,7 @@ def group_consecutives(num_consecutives, group_list):
 
 
 if __name__ == "__main__":
-    with open("input/day9.txt", "r") as f:
+    with open("input/day09.txt", "r") as f:
         raw_input = list(map(int, f.read().strip().split("\n")))
 
     # Part 1 (first number not sum of 2 from previous 25)

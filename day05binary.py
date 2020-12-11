@@ -26,7 +26,7 @@ def find_seat_id(boarding_pass):
 
 
 if __name__ == "__main__":
-    with open("input/day5.txt", "r") as f:
+    with open("input/day05.txt", "r") as f:
         boarding_passes = map(str.strip, f.readlines())
 
     # Part 1 (greatest seat ID)

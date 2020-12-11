@@ -54,7 +54,7 @@ def swap_instruction(instruction_list, idx):
 
 
 if __name__ == "__main__":
-    with open("input/day8.txt", "r") as f:
+    with open("input/day08.txt", "r") as f:
         raw_input = f.read().split("\n")
 
     instruction_pairs = list(map(lambda line: line.split(" "), raw_input))

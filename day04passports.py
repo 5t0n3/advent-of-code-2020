@@ -54,7 +54,7 @@ def height_predicate(height):
 
 
 if __name__ == "__main__":
-    with open("input/day4.txt", "r") as f:
+    with open("input/day04.txt", "r") as f:
         raw_input = f.read()
 
     # Split on blank lines (2 newlines)

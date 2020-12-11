@@ -1,5 +1,6 @@
 from functools import reduce
 
+
 def count_trees(col_change, row_change, input_map):
     """
     Counts trees encountered on route to bottom by moving `row_change` rows down
@@ -31,7 +32,7 @@ def count_trees(col_change, row_change, input_map):
 
 
 if __name__ == "__main__":
-    with open("input/day3.txt", "r") as f:
+    with open("input/day03.txt", "r") as f:
         input_map = list(map(str.strip, f.readlines()))
 
     # Part 1 (3 over, 1 down tree total)
@@ -41,6 +42,7 @@ if __name__ == "__main__":
 
     # Part 2 (multiple different increment amounts)
     step_amounts = [(1, 1), (3, 1), (5, 1), (7, 1), (1, 2)]
-    part2_result = reduce(lambda acc, step: acc * count_trees(*step, input_map), step_amounts, 1)
+    part2_result = reduce(
+        lambda acc, step: acc * count_trees(*step, input_map), step_amounts, 1)
     print(f"Part 2 result: {part2_result}")
     assert part2_result == 727923200, f"Unexpected part 2 result: {part2_result}"

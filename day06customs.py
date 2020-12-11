@@ -13,7 +13,7 @@ def group_answer_sets(raw_group):
 
 
 if __name__ == "__main__":
-    with open("input/day6.txt", "r") as f:
+    with open("input/day06.txt", "r") as f:
         # Split on empty line (2 newlines)
         raw_input = f.read().split("\n\n")
 
